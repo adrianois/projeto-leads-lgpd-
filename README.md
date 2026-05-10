@@ -5,7 +5,7 @@ Sistema de Captura e Gerenciamento de Leads para CTAs
 ## O que foi criado
 
 - Backend Node.js com `Express.js` para receber leads via `POST /api/leads`
-- Conexão com banco Postgres (`DATABASE_URL`) para armazenar leads
+- Conexão com Supabase via `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`
 - Dashboard simples em `public/dashboard.html`
 - Notificação por email via `Nodemailer`
 - Integração preparada para formulários estáticos do blog
@@ -25,7 +25,7 @@ Sistema de Captura e Gerenciamento de Leads para CTAs
 1. Copie `.env.example` para `.env`
 2. Abra o Supabase e crie um novo projeto PostgreSQL
 3. No painel do Supabase, abra o SQL Editor e execute o arquivo `supabase-init.sql`
-4. Preencha `DATABASE_URL` com a string do Supabase/Postgres
+4. Preencha `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` em `.env`
 5. Preencha os dados de SMTP em `EMAIL_HOST`, `EMAIL_USER`, `EMAIL_PASS` e `ALERT_EMAIL_TO`
 6. Rode:
 
@@ -33,6 +33,60 @@ Sistema de Captura e Gerenciamento de Leads para CTAs
 npm install
 npm run dev
 ```
+
+## Teste de conexão com o Supabase
+
+Se você quiser validar a conexão com o Supabase localmente, execute:
+
+```bash
+node test-db-connection.js
+```
+
+O script tentará conectar usando `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` do seu `.env`.
+
+## Configuração SMTP Gmail
+
+Para usar o email `adriano.uperttech@gmail.com`, as configurações são:
+
+```env
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=adriano.uperttech@gmail.com
+EMAIL_PASS=<sua-senha-ou-app-password>
+EMAIL_FROM=adriano.uperttech@gmail.com
+ALERT_EMAIL_TO=<seu-email-de-alertas>
+```
+
+- Use `smtp.gmail.com` com STARTTLS e porta `587`.
+- `EMAIL_SECURE=false` funciona com STARTTLS na porta `587`.
+- Não compartilhe sua senha real no repositório.
+
+## Como gerar a senha de app do Google
+
+1. Acesse `https://myaccount.google.com/` e entre com `adriano.uperttech@gmail.com`.
+2. No painel lateral, clique em `Segurança`.
+3. Em `Como fazer login no Google`, verifique se `Verificação em duas etapas` está ativada.
+   - Se não estiver, ative-a primeiro.
+4. Após ativar, volte para `Segurança` e abra `Senhas de app`.
+5. Selecione `Email` como app e `Outro (nome personalizado)` como dispositivo.
+6. Informe um nome como `Lead API` e clique em `Gerar`.
+7. Copie a senha de 16 caracteres exibida.
+8. Cole essa senha em `EMAIL_PASS` no arquivo `.env`.
+
+### Exemplo final em `.env`
+
+```env
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=adriano.uperttech@gmail.com
+EMAIL_PASS=xxxxxxxxxxxxxxxx
+EMAIL_FROM=adriano.uperttech@gmail.com
+ALERT_EMAIL_TO=adriano.uperttech@gmail.com
+```
+
+> Use `ALERT_EMAIL_TO` para receber a notificação de novos leads.
 
 ## Rotas disponíveis
 
@@ -113,5 +167,5 @@ create table if not exists leads (
 ## Deploy
 
 - Recomendado: Vercel, Netlify ou Heroku.
-- Defina `DATABASE_URL` e variáveis de SMTP no painel do deploy.
+- Defina `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` e variáveis de SMTP no painel do deploy.
 - O dashboard estará disponível em `/dashboard.html`.

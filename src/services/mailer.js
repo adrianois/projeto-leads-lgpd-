@@ -1,20 +1,20 @@
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
+import { loadEnvironment } from '../config/environment.js';
 
-dotenv.config();
+const env = loadEnvironment();
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT || 587),
-  secure: process.env.EMAIL_SECURE === 'true',
+  host: env.emailHost,
+  port: env.emailPort,
+  secure: env.emailSecure,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: env.emailUser,
+    pass: env.emailPass
   }
 });
 
 export async function sendLeadNotification(lead) {
-  if (!process.env.ALERT_EMAIL_TO) {
+  if (!env.alertEmailTo) {
     return;
   }
 
@@ -29,8 +29,8 @@ export async function sendLeadNotification(lead) {
   `;
 
   await transporter.sendMail({
-    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
-    to: process.env.ALERT_EMAIL_TO,
+    from: env.emailFrom,
+    to: env.alertEmailTo,
     subject: 'Novo lead LGPD capturado',
     html
   });
