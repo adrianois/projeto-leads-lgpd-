@@ -1,7 +1,7 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import { createLead, getLeads } from '../controllers/leadsController.js';
-import { apiKeyAuth } from '../middleware/auth.js';
+import { requireRoot } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -22,6 +22,6 @@ const strictLimiter = rateLimit({
 });
 
 router.post('/', leadsLimiter, createLead);
-router.get('/', strictLimiter, apiKeyAuth, getLeads);
+router.get('/', strictLimiter, requireRoot, getLeads);
 
 export default router;

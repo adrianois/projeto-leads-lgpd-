@@ -4,10 +4,10 @@ import { validateEmail } from '../middleware/validation.js';
 
 export async function createLead(req, res) {
   try {
-    const { email, name, cta, source, origin, consent, metadata } = req.body;
+    const { email, name, cta, source, origin, consent, metadata, entity_id } = req.body;
 
-    if (!email || !cta) {
-      return res.status(400).json({ error: 'Email e CTA são obrigatórios.' });
+    if (!email || typeof email !== 'string' || !cta || typeof cta !== 'string' || !entity_id || typeof entity_id !== 'string') {
+      return res.status(400).json({ error: 'Email, CTA e entity_id são obrigatórios e devem ser texto válidos.' });
     }
 
     if (!validateEmail(email)) {
@@ -19,11 +19,12 @@ export async function createLead(req, res) {
     }
 
     const lead = {
+      entity_id,
       email: email.trim().toLowerCase(),
-      name: name ? name.trim() : null,
+      name: (name && typeof name === 'string') ? name.trim() : null,
       cta: cta.trim(),
-      source: source ? source.trim() : null,
-      origin: origin ? origin.trim() : null,
+      source: (source && typeof source === 'string') ? source.trim() : null,
+      origin: (origin && typeof origin === 'string') ? origin.trim() : null,
       consent: true,
       metadata: metadata || {}
     };

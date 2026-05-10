@@ -1,9 +1,9 @@
 import supabase from '../lib/supabase.js';
 
-export async function insertLead({ email, name, cta, source, origin, consent, metadata }) {
+export async function insertLead({ entity_id, email, name, cta, source, origin, consent, metadata }) {
   const { data, error } = await supabase
     .from('leads')
-    .insert([{ email, name, cta, source, origin, consent, metadata }])
+    .insert([{ entity_id, email, name, cta, source, origin, consent, metadata }])
     .select('*')
     .single();
 
