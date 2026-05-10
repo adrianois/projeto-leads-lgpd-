@@ -1,0 +1,93 @@
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #111827;
+  background: #f8fafc;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-size: clamp(2rem, 2.5vw, 3rem);
+}
+
+.filters {
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.filters form {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+input {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button[type='submit'] {
+  background: #2563eb;
+  color: white;
+}
+
+button#resetButton {
+  background: #e5e7eb;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}

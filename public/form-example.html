@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exemplo de Captura de Lead</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Formulário de Captura de Leads</h1>
+    <form id="leadForm">
+      <label>
+        Nome
+        <input type="text" name="name" placeholder="Seu nome" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" placeholder="seu@exemplo.com" required />
+      </label>
+      <label>
+        CTA
+        <select name="cta" required>
+          <option value="inscrever-gratuitamente">Quero me inscrever gratuitamente</option>
+          <option value="consulta-lgpd">Quero consultoria LGPD</option>
+        </select>
+      </label>
+      <label>
+        <span>Consentimento para LGPD</span>
+        <label>
+          <input type="checkbox" name="consent" required />
+          Eu concordo com a coleta e armazenamento dos meus dados para contato.
+        </label>
+      </label>
+      <button type="submit">Enviar lead</button>
+    </form>
+    <p id="formMessage"></p>
+  </main>
+  <script src="/form-example.js"></script>
+</body>
+</html>

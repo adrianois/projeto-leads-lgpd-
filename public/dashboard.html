@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard de Leads</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Dashboard de Leads</h1>
+
+    <section class="filters">
+      <form id="filterForm">
+        <label>
+          CTA
+          <input type="text" name="cta" placeholder="inscrever-gratuitamente" />
+        </label>
+        <label>
+          Fonte
+          <input type="text" name="source" placeholder="blog/lgpd" />
+        </label>
+        <label>
+          Início
+          <input type="date" name="startDate" />
+        </label>
+        <label>
+          Fim
+          <input type="date" name="endDate" />
+        </label>
+        <button type="submit">Filtrar</button>
+        <button type="button" id="resetButton">Limpar</button>
+      </form>
+    </section>
+
+    <section>
+      <p id="leadCount">Carregando leads...</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Email</th>
+              <th>Nome</th>
+              <th>CTA</th>
+              <th>Fonte</th>
+              <th>Origem</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="/dashboard.js"></script>
+</body>
+</html>
