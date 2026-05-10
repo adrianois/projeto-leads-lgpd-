@@ -1,5 +1,5 @@
-import { insertLead, fetchLeads } from '../services/db.js';
-import { sendLeadNotification } from '../services/mailer.js';
+import { insertLead, fetchLeads } from '../services/leads.service.js';
+import { sendLeadNotification } from '../services/notification.service.js';
 import { validateEmail } from '../middleware/validation.js';
 
 export async function createLead(req, res) {

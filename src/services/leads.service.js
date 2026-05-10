@@ -1,11 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-import { loadEnvironment } from '../config/environment.js';
-
-const env = loadEnvironment();
-
-const supabase = createClient(env.supabaseUrl, env.supabaseKey, {
-  auth: { persistSession: false }
-});
+import supabase from '../lib/supabase.js';
 
 export async function insertLead({ email, name, cta, source, origin, consent, metadata }) {
   const { data, error } = await supabase
